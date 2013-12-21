@@ -43,8 +43,8 @@ Kendo.DynamicLinq implements server paging, filtering and sorting via Dynamic Li
 
 The following examples use Kendo.DynamicLinq.
 
-[ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-crud)
-[ASP.NET Web Forms and Page Methods](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-page-methods-crud)
-[ASP.NET Web Forms and WCF](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-wcf-crud)
-[ASP.NET Web Forms and Web Services](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-web-service-crud)
-[ASP.NET Web Forms and Web API](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-webapi-crud)
+- [ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-crud)
+- [ASP.NET Web Forms and Page Methods](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-page-methods-crud)
+- [ASP.NET Web Forms and WCF](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-wcf-crud)
+- [ASP.NET Web Forms and Web Services](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-web-service-crud)
+- [ASP.NET Web Forms and Web API](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-webapi-crud)
