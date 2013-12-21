@@ -40,7 +40,7 @@ namespace Kendo.DynamicLinq
 
         private static IQueryable<T> Filter<T>(IQueryable<T> queryable, Filter filter)
         {
-            if (filter != null)
+            if (filter != null && filter.Logic != null)
             {
                 // Collect a flat list of all filters
                 var filters = filter.All();
