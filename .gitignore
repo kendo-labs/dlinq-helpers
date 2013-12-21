@@ -36,3 +36,5 @@ x64/
 
 # Publish Web Output
 *.Publish.xml
+
+Kendo.DynamicLinq.*.nupkg
