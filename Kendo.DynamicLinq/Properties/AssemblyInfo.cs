@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Kendo.DynamicLinq")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Server side paging, sorting and filtering via Dynamic Linq")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("Kendo.DynamicLinq")]
 [assembly: AssemblyTrademark("")]
