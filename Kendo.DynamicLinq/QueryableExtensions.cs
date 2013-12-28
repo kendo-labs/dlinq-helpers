@@ -29,7 +29,9 @@ namespace Kendo.DynamicLinq
             queryable = Sort(queryable, sort);
 
             // Finally page the data
-            queryable = Page(queryable, take, skip);
+            if (take > 0) {
+                queryable = Page(queryable, take, skip);
+            }
 
             return new DataSourceResult
             {
