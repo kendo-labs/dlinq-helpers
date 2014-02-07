@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -45,17 +45,18 @@ namespace Kendo.DynamicLinq
         /// Mapping of Kendo DataSource filtering operators to Dynamic Linq
         /// </summary>
         private static readonly IDictionary<string, string> operators = new Dictionary<string, string>
-    {
-        {"eq", "="},
-        {"neq", "!="},
-        {"lt", "<"},
-        {"lte", "<="},
-        {"gt", ">"},
-        {"gte", ">="},
-        {"startswith", "StartsWith"},
-        {"endswith", "EndsWith"},
-        {"contains", "Contains"}
-    };
+        {
+            {"eq", "="},
+            {"neq", "!="},
+            {"lt", "<"},
+            {"lte", "<="},
+            {"gt", ">"},
+            {"gte", ">="},
+            {"startswith", "StartsWith"},
+            {"endswith", "EndsWith"},
+            {"contains", "Contains"},
+            {"doesnotcontain", "Contains"}
+        };
 
         /// <summary>
         /// Get a flattened list of all child filter expressions.
@@ -100,6 +101,11 @@ namespace Kendo.DynamicLinq
             int index = filters.IndexOf(this);
 
             string comparison = operators[Operator];
+            
+            if (Operator == "doesnotcontain")
+            {
+                return String.Format("!{0}.{1}(@{2})", Field, comparison, index);
+            }
 
             if (comparison == "StartsWith" || comparison == "EndsWith" || comparison == "Contains")
             {
