@@ -1,7 +1,7 @@
 #Kendo.DynamicLinq
 
 ## Description
-Kendo.DynamicLinq implements server paging, filtering and sorting via Dynamic Linq.
+Kendo.DynamicLinq implements server paging, filtering, sorting and aggregating via Dynamic Linq.
 
 ## Usage
 1. Add the Kendo.DynamicLinq NuGet package to your project.
@@ -14,13 +14,15 @@ Kendo.DynamicLinq implements server paging, filtering and sorting via Dynamic Li
 
         schema: {
             data: "Data",
-            total: "Total"
+            total: "Total",
+            aggregates: "Aggregates"
+
         }
 1. Import the Kendo.DynamicLinq namespace.
 1. Use the `ToDataSourceResult` extension method to apply paging, sorting and filtering.
 
         [WebMethod]
-        public static DataSourceResult Products(int take, int skip, IEnumerable<Sort> sort, Filter filter)
+        public static DataSourceResult Products(int take, int skip, IEnumerable<Sort> sort, Filter filter, IEnumerable<Aggregator> aggregates)
         {
             using (var northwind = new Northwind())
             {
@@ -35,7 +37,7 @@ Kendo.DynamicLinq implements server paging, filtering and sorting via Dynamic Li
                         UnitsInStock = p.UnitsInStock,
                         Discontinued = p.Discontinued
                     })
-                 .ToDataSourceResult(take, skip, sort, filter);
+                 .ToDataSourceResult(take, skip, sort, filter, aggregates);
             }
         }
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
+﻿using System.Collections;
 
 namespace Kendo.DynamicLinq
 {
@@ -18,5 +16,10 @@ namespace Kendo.DynamicLinq
         /// The total number of records available.
         /// </summary>
         public int Total { get; set; }
+
+        /// <summary>
+        /// Represents a requested aggregates.
+        /// </summary>
+        public dynamic Aggregates { get; set; }
     }
 }
