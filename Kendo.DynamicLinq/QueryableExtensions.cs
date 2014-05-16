@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
@@ -96,17 +97,19 @@ namespace Kendo.DynamicLinq
 					{
 						var prop = typeof (T).GetProperty(aggregate.Field);
 						var param = Expression.Parameter(typeof (T), "s");
-						var selector = Expression.Lambda(Expression.MakeMemberAccess(param, prop), param);
-
+						var selector = aggregate.Aggregate == "count" && (Nullable.GetUnderlyingType(prop.PropertyType) != null)
+							? Expression.Lambda(Expression.NotEqual(Expression.MakeMemberAccess(param, prop), Expression.Constant(null, prop.PropertyType)), param)
+							: Expression.Lambda(Expression.MakeMemberAccess(param, prop), param);
 						var mi = aggregate.MethodInfo(typeof (T));
-
 						if (mi == null)
 							continue;
 
 						var val = queryable.Provider.Execute(Expression.Call(null, mi,
-							aggregate.Aggregate != "count" ? new[] { queryable.Expression, Expression.Quote(selector) } : new[] { queryable.Expression }));
+							aggregate.Aggregate == "count" && (Nullable.GetUnderlyingType(prop.PropertyType) == null)
+								? new[] { queryable.Expression }
+								: new[] { queryable.Expression, Expression.Quote(selector) }));
 
-						fieldProps.Add(new DynamicProperty(aggregate.Aggregate, prop.PropertyType), val);
+						fieldProps.Add(new DynamicProperty(aggregate.Aggregate, typeof(object)), val);
 					}
 					type = DynamicExpression.CreateClass(fieldProps.Keys);
 					var fieldObj = Activator.CreateInstance(type);

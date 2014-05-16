@@ -44,7 +44,8 @@ namespace Kendo.DynamicLinq
 						((Func<Type, Type[]>)this.GetType().GetMethod("SumAvgFunc", BindingFlags.Static | BindingFlags.NonPublic)
 						.MakeGenericMethod(proptype).Invoke(null, null)).Method, 1).MakeGenericMethod(type);
 				case "count":
-					return GetMethod(CultureInfo.InvariantCulture.TextInfo.ToTitleCase(Aggregate), CountFunc().Method, 1).MakeGenericMethod(type);
+					return GetMethod(CultureInfo.InvariantCulture.TextInfo.ToTitleCase(Aggregate),
+						Nullable.GetUnderlyingType(proptype) != null ? CountNullableFunc().Method : CountFunc().Method, 1).MakeGenericMethod(type);
 			}
 			return null;
 		}
@@ -59,6 +60,15 @@ namespace Kendo.DynamicLinq
 							parameters.Select(p => p.ParameterType).SequenceEqual((Type[])methodTypes.Invoke(null, genericArguments))
 						  select method;
 			return methods.FirstOrDefault();
+		}
+
+		private static Func<Type, Type[]> CountNullableFunc()
+		{
+			return (T) => new[]
+				{
+					typeof(IQueryable<>).MakeGenericType(T),
+					typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(T, typeof(bool)))
+				};
 		}
 
 		private static Func<Type, Type[]> CountFunc()
