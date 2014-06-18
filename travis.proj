@@ -2,6 +2,6 @@
 <Project ToolsVersion="4.0" DefaultTargets="CI" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="CI" DependsOnTargets="Build" />
   <Target Name="Build">
-    <MSBuild Projects="Kendo.DynamicLinq.sln" Properties="Configuration=Debug;Platform=x86" />
+    <MSBuild Projects="Kendo.DynamicLinq.sln" Properties="Configuration=Debug" />
   </Target>
 </Project>
