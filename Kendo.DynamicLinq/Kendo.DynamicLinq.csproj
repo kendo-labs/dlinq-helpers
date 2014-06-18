@@ -36,7 +36,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Linq.Dynamic">
-      <HintPath>packages\System.Linq.Dynamic.1.0.0\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.0\lib\net40\System.Linq.Dynamic.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
@@ -49,6 +49,7 @@
     <Compile Include="Sort.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Kendo.DynamicLinq.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
