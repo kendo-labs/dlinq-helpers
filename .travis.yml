@@ -1,5 +1,7 @@
 language: c
 
+cache: apt
+
 install:
   - sudo apt-get install mono-devel mono-gmcs nunit-console
 
