@@ -43,8 +43,9 @@ namespace Kendo.DynamicLinq.Tests
                     Field = "Age"
                 } }));
 
-                Assert.AreEqual("{\"Aggregates\":{\"__type\":\"DynamicClass2:#\",\"Age\":{\"sum\":60}},\"Data\":[],\"Total\":2}", 
-                    Encoding.UTF8.GetString(stream.ToArray()));
+                var json = Encoding.UTF8.GetString(stream.ToArray()).Replace("\"__type\":\"DynamicClass2:#\",", "");
+
+                Assert.AreEqual("{\"Aggregates\":{\"Age\":{\"sum\":60}},\"Data\":[],\"Total\":2}", json);
             }
         }
     }
