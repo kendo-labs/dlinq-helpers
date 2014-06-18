@@ -1,6 +1,6 @@
 #Kendo.DynamicLinq
 
-![Build Status](https://travis-ci.org/kendo-labs/dlinq-helpers.svg?branch=master)](https://travis-ci.org/kendo-labs/dlinq-helpers)
+[![Build Status](https://travis-ci.org/kendo-labs/dlinq-helpers.svg?branch=master)](https://travis-ci.org/kendo-labs/dlinq-helpers)
 
 ## Description
 Kendo.DynamicLinq implements server paging, filtering, sorting and aggregating via Dynamic Linq.
