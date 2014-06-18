@@ -29,13 +29,14 @@ namespace Kendo.DynamicLinq
 			var total = queryable.Count();
 
 			// Calculate the aggregates
-			dynamic aggregate = Aggregate(queryable, aggregates);
+			var aggregate = Aggregate(queryable, aggregates);
 
 			// Sort the data
 			queryable = Sort(queryable, sort);
 
 			// Finally page the data
-			if (take > 0) {
+			if (take > 0) 
+            {
 				queryable = Page(queryable, take, skip);
 			}
 
@@ -82,7 +83,7 @@ namespace Kendo.DynamicLinq
 			return queryable;
 		}
 
-		private static dynamic Aggregate<T>(IQueryable<T> queryable, IEnumerable<Aggregator> aggregates)
+		private static object Aggregate<T>(IQueryable<T> queryable, IEnumerable<Aggregator> aggregates)
 		{
 			if (aggregates != null && aggregates.Any())
 			{
@@ -116,14 +117,22 @@ namespace Kendo.DynamicLinq
 						type.GetProperty(p.Name).SetValue(fieldObj, fieldProps[p], null);
 					objProps.Add(new DynamicProperty(group.Key, fieldObj.GetType()), fieldObj);
 				}
+
 				type = DynamicExpression.CreateClass(objProps.Keys);
+
 				var obj = Activator.CreateInstance(type);
+
 				foreach (var p in objProps.Keys)
+                {
 					type.GetProperty(p.Name).SetValue(obj, objProps[p], null);
+                }
+
 				return obj;
 			}
-			else
-				return new {};
+            else
+            {
+                return null;
+            }
 		}
 
 		private static IQueryable<T> Sort<T>(IQueryable<T> queryable, IEnumerable<Sort> sort)
