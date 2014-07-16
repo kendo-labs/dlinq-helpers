@@ -12,7 +12,7 @@ namespace Kendo.DynamicLinq
 		/// <summary>
 		/// Applies data processing (paging, sorting, filtering and aggregates) over IQueryable using Dynamic Linq.
 		/// </summary>
-		/// <typeparam name="T">The type of the IQueryable</typeparam>
+		/// <typeparam name="T">The type of the IQueryable.</typeparam>
 		/// <param name="queryable">The IQueryable which should be processed.</param>
 		/// <param name="take">Specifies how many items to take. Configurable via the pageSize setting of the Kendo DataSource.</param>
 		/// <param name="skip">Specifies how many items to skip.</param>
@@ -51,7 +51,7 @@ namespace Kendo.DynamicLinq
 		/// <summary>
 		/// Applies data processing (paging, sorting and filtering) over IQueryable using Dynamic Linq.
 		/// </summary>
-		/// <typeparam name="T">The type of the IQueryable</typeparam>
+		/// <typeparam name="T">The type of the IQueryable.</typeparam>
 		/// <param name="queryable">The IQueryable which should be processed.</param>
 		/// <param name="take">Specifies how many items to take. Configurable via the pageSize setting of the Kendo DataSource.</param>
 		/// <param name="skip">Specifies how many items to skip.</param>
@@ -62,6 +62,18 @@ namespace Kendo.DynamicLinq
 		{
 			return queryable.ToDataSourceResult(take, skip, sort, filter, null);
 		}
+
+        /// <summary>
+        ///  Applies data processing (paging, sorting and filtering) over IQueryable using Dynamic Linq.
+        /// </summary>
+        /// <typeparam name="T">The type of the IQueryable.</typeparam>
+        /// <param name="queryable">The IQueryable which should be processed.</param>
+        /// <param name="request">The DataSourceRequest object containing take, skip, order, and filter data.</param>
+        /// <returns>A DataSourceResult object populated from the processed IQueryable.</returns>
+	    public static DataSourceResult ToDataSourceResult<T>(this IQueryable<T> queryable, DataSourceRequest request)
+	    {
+	        return queryable.ToDataSourceResult(request.Take, request.Skip, request.Sort, request.Filter, null);
+	    }
 
 		private static IQueryable<T> Filter<T>(IQueryable<T> queryable, Filter filter)
 		{
