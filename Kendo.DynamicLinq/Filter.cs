@@ -55,7 +55,8 @@ namespace Kendo.DynamicLinq
             {"startswith", "StartsWith"},
             {"endswith", "EndsWith"},
             {"contains", "Contains"},
-            {"doesnotcontain", "Contains"}
+            {"doesnotcontain", "Contains"},
+            {"insensitivecontains", "ToLower().Contains"}
         };
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace Kendo.DynamicLinq
             }
             else
             {
-                filters.Add(this);
+                //filters.Add(this);
             }
         }
 
@@ -109,6 +110,12 @@ namespace Kendo.DynamicLinq
 
             if (comparison == "StartsWith" || comparison == "EndsWith" || comparison == "Contains")
             {
+                return String.Format("{0}.{1}(@{2})", Field, comparison, index);
+            }
+
+            if (Operator == "insensitivecontains")
+            {
+                Value = Value.ToString().ToLower();
                 return String.Format("{0}.{1}(@{2})", Field, comparison, index);
             }
 
