@@ -91,7 +91,7 @@ namespace Kendo.DynamicLinq
         /// Converts the filter expression to a predicate suitable for Dynamic Linq e.g. "Field1 = @1 and Field2.Contains(@2)"
         /// </summary>
         /// <param name="filters">A list of flattened filters.</param>
-        public string ToExpression(IList<Filter> filters)
+        public virtual string ToExpression(IList<Filter> filters)
         {
             if (Filters != null && Filters.Any())
             {

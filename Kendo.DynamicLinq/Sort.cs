@@ -25,7 +25,7 @@ namespace Kendo.DynamicLinq
         /// <summary>
         /// Converts to form required by Dynamic Linq e.g. "Field1 desc"
         /// </summary>
-        public string ToExpression()
+        public virtual string ToExpression()
         {
             return Field + " " + Dir;
         }
