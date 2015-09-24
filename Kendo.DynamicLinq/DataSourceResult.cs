@@ -6,16 +6,24 @@ using System.Runtime.Serialization;
 
 namespace Kendo.DynamicLinq
 {
-    /// <summary>
-    /// Describes the result of Kendo DataSource read operation. 
-    /// </summary>
-    [KnownType("GetKnownTypes")]
-    public class DataSourceResult
+	/// <summary>
+	/// Describes the result of Kendo DataSource read operation. 
+	/// </summary>
+	[KnownType("GetKnownTypes")]
+	public class DataSourceResult : DataSourceResult<object>
+	{	
+	}
+
+	/// <summary>
+	/// Describes the result of Kendo DataSource read operation. 
+	/// </summary>
+	[KnownType("GetKnownTypes")]
+    public class DataSourceResult<T>
     {
         /// <summary>
         /// Represents a single page of processed data.
         /// </summary>
-        public IEnumerable Data { get; set; }
+        public IEnumerable<T> Data { get; set; }
 
         /// <summary>
         /// The total number of records available.

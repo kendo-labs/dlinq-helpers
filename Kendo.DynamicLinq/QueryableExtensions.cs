@@ -20,7 +20,7 @@ namespace Kendo.DynamicLinq
 		/// <param name="filter">Specifies the current filter.</param>
 		/// <param name="aggregates">Specifies the current aggregates.</param>
 		/// <returns>A DataSourceResult object populated from the processed IQueryable.</returns>
-		public static DataSourceResult ToDataSourceResult<T>(this IQueryable<T> queryable, int take, int skip, IEnumerable<Sort> sort, Filter filter, IEnumerable<Aggregator> aggregates)
+		public static DataSourceResult<T> ToDataSourceResult<T>(this IQueryable<T> queryable, int take, int skip, IEnumerable<Sort> sort, Filter filter, IEnumerable<Aggregator> aggregates)
 		{
 			// Filter the data first
 			queryable = Filter(queryable, filter);
@@ -40,7 +40,7 @@ namespace Kendo.DynamicLinq
 				queryable = Page(queryable, take, skip);
 			}
 
-			return new DataSourceResult
+			return new DataSourceResult<T>
 			{
 				Data = queryable.ToList(),
 				Total = total,
@@ -58,7 +58,7 @@ namespace Kendo.DynamicLinq
 		/// <param name="sort">Specifies the current sort order.</param>
 		/// <param name="filter">Specifies the current filter.</param>
 		/// <returns>A DataSourceResult object populated from the processed IQueryable.</returns>
-		public static DataSourceResult ToDataSourceResult<T>(this IQueryable<T> queryable, int take, int skip, IEnumerable<Sort> sort, Filter filter)
+		public static DataSourceResult<T> ToDataSourceResult<T>(this IQueryable<T> queryable, int take, int skip, IEnumerable<Sort> sort, Filter filter)
 		{
 			return queryable.ToDataSourceResult(take, skip, sort, filter, null);
 		}
@@ -70,7 +70,7 @@ namespace Kendo.DynamicLinq
         /// <param name="queryable">The IQueryable which should be processed.</param>
         /// <param name="request">The DataSourceRequest object containing take, skip, order, and filter data.</param>
         /// <returns>A DataSourceResult object populated from the processed IQueryable.</returns>
-	    public static DataSourceResult ToDataSourceResult<T>(this IQueryable<T> queryable, DataSourceRequest request)
+	    public static DataSourceResult<T> ToDataSourceResult<T>(this IQueryable<T> queryable, DataSourceRequest request)
 	    {
 	        return queryable.ToDataSourceResult(request.Take, request.Skip, request.Sort, request.Filter, null);
 	    }
