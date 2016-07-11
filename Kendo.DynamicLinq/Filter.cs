@@ -52,6 +52,8 @@ namespace Kendo.DynamicLinq
             {"lte", "<="},
             {"gt", ">"},
             {"gte", ">="},
+            {"isnull", "="},
+            {"isnotnull", "!="},
             {"startswith", "StartsWith"},
             {"endswith", "EndsWith"},
             {"contains", "Contains"},
@@ -105,6 +107,11 @@ namespace Kendo.DynamicLinq
             if (Operator == "doesnotcontain")
             {
                 return String.Format("!{0}.{1}(@{2})", Field, comparison, index);
+            }
+
+            if (Operator == "isnull" || Operator == "isnotnull")
+            {
+                return String.Format("{0} {1} null", Field, comparison);
             }
 
             if (comparison == "StartsWith" || comparison == "EndsWith" || comparison == "Contains")
