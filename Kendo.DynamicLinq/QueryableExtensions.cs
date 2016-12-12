@@ -27,7 +27,7 @@ namespace Kendo.DynamicLinq
         {
             //the way this extension works it pages the records using skip and take 
             //in order to do that we need at least one sorted property
-            if (sort != null && !sort.Any())
+            if ((sort != null) && !sort.Any())
             {
                 var elementType = queryable.ElementType;
                 var properties = elementType.GetProperties().ToList();
@@ -56,7 +56,7 @@ namespace Kendo.DynamicLinq
                 {
                     sortByObject.Field = propertyInfo.Name;
                 }
-                sort = new List<Sort> { sortByObject };
+                sort = new List<Sort> {sortByObject};
             }
             // Filter the data first
             queryable = Filter(queryable, filter);
@@ -67,11 +67,11 @@ namespace Kendo.DynamicLinq
             // Calculate the aggregates
             var aggregate = Aggregate(queryable, aggregates);
 
-            if (group != null && group.Any())
+            if ((group != null) && group.Any())
             {
                 foreach (var source in group.Reverse())
                 {
-                    sort = sort.Append(new Sort()
+                    sort = sort.Append(new Sort
                     {
                         Field = source.Field,
                         Dir = source.Dir
@@ -93,14 +93,20 @@ namespace Kendo.DynamicLinq
                 Total = total,
                 Aggregates = aggregate
             };
+
+            //to use add this to your DataSource
+            //schema: {
+            //          groups: "Group",
+            //          data: "Data"
+            //}
+
             // Group By
-            if (group != null && group.Any())
+            if ((group != null) && group.Any())
             {
                 var groupedQuery =
                     queryable.ToList().GroupByMany(group.Select(p => p.Field).ToArray());
 
                 result.Group = groupedQuery;
-
             }
             else
             {
@@ -108,8 +114,6 @@ namespace Kendo.DynamicLinq
             }
             return result;
         }
-
-
 
         /// <summary>
         ///     Applies data processing (paging, sorting and filtering) over IQueryable using Dynamic Linq.
@@ -142,8 +146,10 @@ namespace Kendo.DynamicLinq
 
         public static IEnumerable<T> Append<T>(this IEnumerable<T> source, T item)
         {
-            foreach (T i in source)
+            foreach (var i in source)
+            {
                 yield return i;
+            }
 
             yield return item;
         }
@@ -152,8 +158,10 @@ namespace Kendo.DynamicLinq
         {
             yield return item;
 
-            foreach (T i in source)
+            foreach (var i in source)
+            {
                 yield return i;
+            }
         }
 
         private static IQueryable<T> Filter<T>(IQueryable<T> queryable, Filter filter)
@@ -180,7 +188,7 @@ namespace Kendo.DynamicLinq
                     }
                     if (values[i] is DateTime)
                     {
-                        var dateTimeFilterValue = (DateTime)values[i];
+                        var dateTimeFilterValue = (DateTime) values[i];
                         values[i] = new DateTime(dateTimeFilterValue.Year, dateTimeFilterValue.Month,
                             dateTimeFilterValue.Day, 0, 0, 0);
                     }
@@ -191,11 +199,11 @@ namespace Kendo.DynamicLinq
                 //Remove duplicate filters
                 //NOTE: we loop, and don't use .distinct for a reason!
                 //There is a miniscule chance different columns will filter by the same value, in which case using distinct will remove too many filters
-                for (int i = filters.Count - 1; i >= 0; i--)
+                for (var i = filters.Count - 1; i >= 0; i--)
                 {
                     var previousFilter = filters.ElementAtOrDefault(i - 1);
 
-                    if (previousFilter != null && filters[i].Equals(previousFilter))
+                    if ((previousFilter != null) && filters[i].Equals(previousFilter))
                     {
                         filters.RemoveAt(i);
 
@@ -203,14 +211,14 @@ namespace Kendo.DynamicLinq
                     }
                 }
                 var filtersList = filters.ToList();
-                for (int i = 0; i < filters.Count; i++)
+                for (var i = 0; i < filters.Count; i++)
                 {
-                    if (filters[i].Value is DateTime && filters[i].Operator == "eq")
+                    if (filters[i].Value is DateTime && (filters[i].Operator == "eq"))
                     {
                         var filterToEdit = filtersList[i];
 
                         //Copy the date from the filter
-                        var baseDate = ((DateTime)filters[i].Value).Date;
+                        var baseDate = ((DateTime) filters[i].Value).Date;
 
                         //Instead of comparing for exact equality, we compare as greater than the start of the day...
                         filterToEdit.Value = new DateTime(baseDate.Year, baseDate.Month, baseDate.Day, 0, 0, 0);
@@ -218,7 +226,7 @@ namespace Kendo.DynamicLinq
                         valuesList[i] = filterToEdit.Value;
 
                         //...and less than the end of that same day (we're making an additional filter here)
-                        var newFilter = new Filter()
+                        var newFilter = new Filter
                         {
                             Value = new DateTime(baseDate.Year, baseDate.Month, baseDate.Day, 23, 59, 59),
                             Field = filters[i].Field,
@@ -277,8 +285,8 @@ namespace Kendo.DynamicLinq
                         var val = queryable.Provider.Execute(Expression.Call(null, mi,
                                                (aggregate.Aggregate == "count") &&
                                                (Nullable.GetUnderlyingType(prop.PropertyType) == null)
-                                                   ? new[] { queryable.Expression }
-                                                   : new[] { queryable.Expression, Expression.Quote(selector) }));
+                                                   ? new[] {queryable.Expression}
+                                                   : new[] {queryable.Expression, Expression.Quote(selector)}));
 
                         fieldProps.Add(new DynamicProperty(aggregate.Aggregate, typeof(object)), val);
                     }
@@ -327,7 +335,5 @@ namespace Kendo.DynamicLinq
             }
             return queryable.Take(take);
         }
-
-
     }
 }
