@@ -22,6 +22,12 @@ namespace Kendo.DynamicLinq
         /// </summary>
         public IEnumerable<Sort> Sort { get; set; }
 
+
+        /// <summary>
+        /// Specifies the requested grouping .
+        /// </summary>
+        public IEnumerable<Sort> Group { get; set; }
+
         /// <summary>
         /// Specifies the requested filter.
         /// </summary>

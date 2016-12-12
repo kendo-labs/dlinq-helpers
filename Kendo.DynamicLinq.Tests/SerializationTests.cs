@@ -41,7 +41,7 @@ namespace Kendo.DynamicLinq.Tests
                 serializer.WriteObject(stream, people.AsQueryable().ToDataSourceResult(1, 2, null, null, new [] { new Aggregator { 
                     Aggregate = "sum",
                     Field = "Age"
-                } }));
+                } },null));
 
                 var json = Encoding.UTF8.GetString(stream.ToArray()).Replace("\"__type\":\"DynamicClass2:#\",", "");
 

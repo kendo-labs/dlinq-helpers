@@ -44,7 +44,10 @@
     <Compile Include="Aggregate.cs" />
     <Compile Include="DataSourceRequest.cs" />
     <Compile Include="DataSourceResult.cs" />
+    <Compile Include="EnumerableExtenstions.cs" />
     <Compile Include="Filter.cs" />
+    <Compile Include="GroupResult.cs" />
+    <Compile Include="GroupSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryableExtensions.cs" />
     <Compile Include="Sort.cs" />
