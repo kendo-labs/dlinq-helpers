@@ -134,7 +134,8 @@ namespace Kendo.DynamicLinq
         /// <returns>A DataSourceResult object populated from the processed IQueryable.</returns>
         public static DataSourceResult ToDataSourceResult<T>(this IQueryable<T> queryable, DataSourceRequest request)
         {
-            return queryable.ToDataSourceResult(request.Take, request.Skip, request.Sort, request.Filter, null,request.Group);
+            return queryable.ToDataSourceResult(request.Take, request.Skip, request.Sort, request.Filter, null,
+                request.Group);
         }
 
         public static IEnumerable<T> Append<T>(this IEnumerable<T> source, T item)
