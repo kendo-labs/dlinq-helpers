@@ -47,6 +47,7 @@
     <Compile Include="DataSourceResult.cs" />
     <Compile Include="EnumerableExtenstions.cs" />
     <Compile Include="Filter.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="GroupResult.cs" />
     <Compile Include="GroupSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

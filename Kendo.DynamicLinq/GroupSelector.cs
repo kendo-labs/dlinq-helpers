@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Kendo.DynamicLinq
 {
@@ -6,5 +7,7 @@ namespace Kendo.DynamicLinq
     {
         public Func<TElement, object> Selector { get; set; }
         public string Field { get; set; }
+        public IEnumerable<Aggregator> Aggregates { get; set; }
+
     }
 }
