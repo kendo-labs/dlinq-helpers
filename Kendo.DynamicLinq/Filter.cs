@@ -1,6 +1,6 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace Kendo.DynamicLinq
@@ -52,10 +52,14 @@ namespace Kendo.DynamicLinq
             {"lte", "<="},
             {"gt", ">"},
             {"gte", ">="},
+            {"isnull", "="},
+            {"isnotnull", "!="},
             {"startswith", "StartsWith"},
             {"endswith", "EndsWith"},
             {"contains", "Contains"},
-            {"doesnotcontain", "Contains"}
+            {"doesnotcontain", "Contains"},
+            {"isempty", ""},
+            {"isnotempty", "!" }
         };
 
         /// <summary>
@@ -101,11 +105,23 @@ namespace Kendo.DynamicLinq
             int index = filters.IndexOf(this);
 
             string comparison = operators[Operator];
-            
+
             if (Operator == "doesnotcontain")
             {
                 return String.Format("!{0}.{1}(@{2})", Field, comparison, index);
             }
+
+            if (Operator == "isnotnull" || Operator == "isnull")
+            {
+                return String.Format("{0} {1} null", Field, comparison);
+            }
+
+            if (Operator == "isempty" || Operator == "isnotempty")
+            {
+                return String.Format("{1}string.IsNullOrEmpty({0})", Field, comparison);
+
+            }
+
 
             if (comparison == "StartsWith" || comparison == "EndsWith" || comparison == "Contains")
             {

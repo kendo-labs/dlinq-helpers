@@ -80,7 +80,7 @@ namespace Kendo.DynamicLinq
 			if (filter != null && filter.Logic != null)
 			{
 				// Collect a flat list of all filters
-				var filters = filter.All();
+				var filters = filter.All().Distinct().ToList();
 
 				// Get all filter values as array (needed by the Where method of Dynamic Linq)
 				var values = filters.Select(f => f.Value).ToArray();
