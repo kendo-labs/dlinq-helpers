@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kendo.DynamicLinq", "Kendo.DynamicLinq\Kendo.DynamicLinq.csproj", "{2BD75D53-E0EA-4995-8B0F-60AD709945AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kendo.DynamicLinq.Tests", "Kendo.DynamicLinq.Tests\Kendo.DynamicLinq.Tests.csproj", "{92FF629E-8872-4CCE-B558-F9FE437DDA86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5A216E56-452F-4090-B21A-B349857EEC19}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +29,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B6DC219-AAEF-4710-ADE9-E302EFC75F55}
 	EndGlobalSection
 EndGlobal
