@@ -21,7 +21,7 @@ namespace Kendo.DynamicLinq.Tests
         {
             using (var stream = new MemoryStream())
             {
-                var serializer = new DataContractJsonSerializer(typeof(DataSourceResult));
+                var serializer = new DataContractJsonSerializer(typeof(DataSourceResult<Person>));
 
                 serializer.WriteObject(stream, new[] { "foo" }.AsQueryable<string>().ToDataSourceResult(1, 0, null, null));
 
@@ -34,7 +34,7 @@ namespace Kendo.DynamicLinq.Tests
         {
             using (var stream = new MemoryStream())
             {
-                var serializer = new DataContractJsonSerializer(typeof(DataSourceResult), new [] { typeof (Person) });
+                var serializer = new DataContractJsonSerializer(typeof(DataSourceResult<Person>), new [] { typeof (Person) });
 
                 var people = new[] { new Person { Age = 30 }, new Person { Age = 30 } };
 
