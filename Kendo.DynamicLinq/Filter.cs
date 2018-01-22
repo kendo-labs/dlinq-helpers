@@ -39,7 +39,7 @@ namespace Kendo.DynamicLinq
         /// Gets or sets the child filter expressions. Set to <c>null</c> if there are no child expressions.
         /// </summary>
         [DataMember(Name = "filters")]
-        public IEnumerable<Filter> Filters { get; set; }
+        public List<Filter> Filters { get; set; } // XmlSerializer needs List instead IEnumerable
 
         /// <summary>
         /// Mapping of Kendo DataSource filtering operators to Dynamic Linq
@@ -57,11 +57,11 @@ namespace Kendo.DynamicLinq
             {"contains", "Contains"},
             {"doesnotcontain", "Contains"}
         };
-
+        
         /// <summary>
         /// Get a flattened list of all child filter expressions.
         /// </summary>
-        public IList<Filter> All()
+        public List<Filter> All()
         {
             var filters = new List<Filter>();
 
@@ -70,7 +70,7 @@ namespace Kendo.DynamicLinq
             return filters;
         }
 
-        private void Collect(IList<Filter> filters)
+        private void Collect(List<Filter> filters)
         {
             if (Filters != null && Filters.Any())
             {
@@ -78,7 +78,10 @@ namespace Kendo.DynamicLinq
                 {
                     filters.Add(filter);
 
-                    filter.Collect(filters);
+                    if (filter.Filters?.Count > 0)
+                    {
+                        filter.Collect(filters);
+                    }
                 }
             }
             else
@@ -91,7 +94,7 @@ namespace Kendo.DynamicLinq
         /// Converts the filter expression to a predicate suitable for Dynamic Linq e.g. "Field1 = @1 and Field2.Contains(@2)"
         /// </summary>
         /// <param name="filters">A list of flattened filters.</param>
-        public string ToExpression(IList<Filter> filters)
+        public string ToExpression(List<Filter> filters)
         {
             if (Filters != null && Filters.Any())
             {

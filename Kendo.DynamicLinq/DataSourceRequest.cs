@@ -20,7 +20,7 @@ namespace Kendo.DynamicLinq
         /// <summary>
         /// Specifies the requested sort order.
         /// </summary>
-        public IEnumerable<Sort> Sort { get; set; }
+        public List<Sort> Sort { get; set; }
 
         /// <summary>
         /// Specifies the requested filter.

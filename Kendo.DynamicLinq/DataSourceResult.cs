@@ -10,12 +10,12 @@ namespace Kendo.DynamicLinq
     /// Describes the result of Kendo DataSource read operation. 
     /// </summary>
     [KnownType("GetKnownTypes")]
-    public class DataSourceResult
+    public class DataSourceResult<T>
     {
         /// <summary>
         /// Represents a single page of processed data.
         /// </summary>
-        public IEnumerable Data { get; set; }
+        public List<T> Data { get; set; }
 
         /// <summary>
         /// The total number of records available.
