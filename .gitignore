@@ -38,3 +38,4 @@ x64/
 *.Publish.xml
 
 Kendo.DynamicLinq.*.nupkg
+/.vs/Kendo.DynamicLinq/v15/Server/sqlite3
