@@ -1,64 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2BD75D53-E0EA-4995-8B0F-60AD709945AC}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kendo.DynamicLinq</RootNamespace>
-    <AssemblyName>Kendo.DynamicLinq</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Copyright>Codout</Copyright>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Codout/dlinq-helpers</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/Codout/Codout.Framework/raw/master/logo-nuget.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/Codout/dlinq-helpers</RepositoryUrl>
+    <PackageTags>Codout, Kendo</PackageTags>
+    <PackageReleaseNotes>Conversão para .Net Standard 2.0</PackageReleaseNotes>
+    <PackageId>Codout.Kendo.DynamicLinq</PackageId>
+    <Authors>Codout.Kendo.DynamicLinq</Authors>
+    <Company>Codout.Kendo.DynamicLinq</Company>
+    <Product>Codout.Kendo.DynamicLinq</Product>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Linq.Dynamic">
-      <HintPath>..\packages\System.Linq.Dynamic.1.0.0\lib\net40\System.Linq.Dynamic.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.8.18" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Aggregate.cs" />
-    <Compile Include="DataSourceRequest.cs" />
-    <Compile Include="DataSourceResult.cs" />
-    <Compile Include="Filter.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryableExtensions.cs" />
-    <Compile Include="Sort.cs" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Kendo.DynamicLinq.nuspec" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

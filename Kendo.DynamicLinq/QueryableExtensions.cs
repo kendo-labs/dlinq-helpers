@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic;
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
-using DynamicExpression = System.Linq.Dynamic.DynamicExpression;
 
 namespace Kendo.DynamicLinq
 {
@@ -123,14 +122,15 @@ namespace Kendo.DynamicLinq
 
 						fieldProps.Add(new DynamicProperty(aggregate.Aggregate, typeof(object)), val);
 					}
-					type = DynamicExpression.CreateClass(fieldProps.Keys);
+				    
+                    type = DynamicClassFactory.CreateType(fieldProps.Select(x => x.Key).ToList());
 					var fieldObj = Activator.CreateInstance(type);
 					foreach (var p in fieldProps.Keys)
 						type.GetProperty(p.Name).SetValue(fieldObj, fieldProps[p], null);
 					objProps.Add(new DynamicProperty(group.Key, fieldObj.GetType()), fieldObj);
 				}
 
-				type = DynamicExpression.CreateClass(objProps.Keys);
+				type = DynamicClassFactory.CreateType(objProps.Select(x => x.Key).ToList());
 
 				var obj = Activator.CreateInstance(type);
 
