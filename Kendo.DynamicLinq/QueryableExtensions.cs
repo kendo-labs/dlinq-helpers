@@ -89,7 +89,10 @@ namespace Kendo.DynamicLinq
 				string predicate = filter.ToExpression(filters);
 
 				// Use the Where method of Dynamic Linq to filter the data
-				queryable = queryable.Where(predicate, values);
+				if (!string.IsNullOrEmpty(predicate))
+				{
+					queryable = queryable.Where(predicate, values);
+				}
 			}
 
 			return queryable;

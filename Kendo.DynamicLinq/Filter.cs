@@ -99,17 +99,18 @@ namespace Kendo.DynamicLinq
             }
 
             int index = filters.IndexOf(this);
+            if (string.IsNullOrEmpty(Operator)) return "";
 
             string comparison = operators[Operator];
-            
+
             if (Operator == "doesnotcontain")
             {
-                return String.Format("!{0}.{1}(@{2})", Field, comparison, index);
+                return String.Format("!{0}+\"\".ToLower().{1}((@{2}+\"\").ToLower())", Field, comparison, index);
             }
 
             if (comparison == "StartsWith" || comparison == "EndsWith" || comparison == "Contains")
             {
-                return String.Format("{0}.{1}(@{2})", Field, comparison, index);
+                return String.Format("({0}+\"\").ToLower().{1}((@{2}+\"\").ToLower())", Field, comparison, index);
             }
 
             return String.Format("{0} {1} @{2}", Field, comparison, index);
