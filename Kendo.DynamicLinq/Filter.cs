@@ -101,7 +101,12 @@ namespace Kendo.DynamicLinq
             int index = filters.IndexOf(this);
 
             string comparison = operators[Operator];
-            
+
+            if (this.Value.GetType().Equals(typeof(Guid)))
+            {
+                return String.Format("{0}.Equals(@{1})", Field, index);
+            }
+
             if (Operator == "doesnotcontain")
             {
                 return String.Format("!{0}.{1}(@{2})", Field, comparison, index);
